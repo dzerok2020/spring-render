@@ -18,7 +18,7 @@ WORKDIR /src
 RUN ./gradlew --no-daemon bootJar
 
 # Sao chép tệp JAR đã xây dựng vào trong image
-COPY build/libs/*.jar app.jar
+COPY --from=build /app/build/libs/*.jar app.jar
 
 # Mở cổng 8080 để giao tiếp với ứng dụng Spring Boot
 EXPOSE 8080
