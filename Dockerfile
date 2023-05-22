@@ -1,11 +1,11 @@
 # Sử dụng hình ảnh Ubuntu làm cơ sở
-FROM ubuntu:latest
+FROM ubuntu:latest AS build
 
 # Cài đặt các gói cần thiết
-RUN apt-get update && apt-get install -y openjdk-11-jdk
+RUN apt-get update && apt-get install -y openjdk-17-jdk
 
 # Thiết lập biến môi trường
-ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64
+ENV JAVA_HOME /usr/lib/jvm/java-17-openjdk-amd64
 ENV PATH $PATH:$JAVA_HOME/bin
 
 # Sao chép mã nguồn của ứng dụng vào trong image
@@ -15,7 +15,7 @@ COPY . /app
 WORKDIR /app
 
 # Xây dựng ứng dụng bằng Gradle
-RUN ./gradlew bootJar --no-daemon
+RUN ./gradlew --no-daemon bootJar
 
 # Sao chép tệp JAR đã xây dựng vào trong image
 COPY build/libs/*.jar app.jar
