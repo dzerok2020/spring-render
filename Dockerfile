@@ -9,10 +9,10 @@ ENV JAVA_HOME /usr/lib/jvm/java-17-openjdk-amd64
 ENV PATH $PATH:$JAVA_HOME/bin
 
 # Sao chép mã nguồn của ứng dụng vào trong image
-COPY . /app
+COPY . /src
 
 # Đặt thư mục làm việc hiện tại
-WORKDIR /app
+WORKDIR /src
 
 # Xây dựng ứng dụng bằng Gradle
 RUN ./gradlew --no-daemon bootJar
